@@ -52,7 +52,7 @@ torch.cuda.manual_seed(rseed)
 #model_name = 'DistMult_{0}_{1}'.format(Config.input_dropout, Config.dropout)
 model_name = '{2}_{0}_{1}_literal'.format(Config.input_dropout, Config.dropout, Config.model_name)
 epochs = Config.epochs
-load = False
+load = True
 if Config.dataset is None:
     Config.dataset = 'FB15k-237'
 model_path = 'saved_models/{0}_{1}.model'.format(Config.dataset, model_name)
@@ -98,7 +98,7 @@ def preprocess(dataset_name, delete_data=False):
 
 
 def main():
-    if Config.process: preprocess(Config.dataset, delete_data=True)
+    if Config.process: preprocess(Config.dataset, delete_data=False)
     input_keys = ['e1', 'rel', 'e2', 'e2_multi1', 'e2_multi2']
     p = Pipeline(Config.dataset, keys=input_keys)
     p.load_vocabs()
@@ -157,8 +157,9 @@ def main():
             print(np.array(total_param_size).sum())
             model.load_state_dict(model_params)
             model.eval()
-            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
-            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
+            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name)
+            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name)
+            exit()  # added as loading is only for evaluation
         else:
             model.init()
 
@@ -193,8 +194,8 @@ def main():
             with torch.no_grad():
                 if epoch % 3 == 0:
                     if epoch > 0:
-                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
-                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
+                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name)
+                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name)
 
 
 if __name__ == '__main__':

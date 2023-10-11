@@ -11,7 +11,8 @@ from sklearn import metrics
 #timer = CUDATimer()
 log = Logger('evaluation{0}.py.txt'.format(datetime.datetime.now()))
 
-def ranking_and_hits(model, dev_rank_batcher, vocab, name):
+def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name):
+
     log.info('')
     log.info('-'*50)
     log.info(name)
@@ -23,6 +24,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name):
     ranks = []
     ranks_left = []
     ranks_right = []
+    triples = []
     for i in range(10):
         hits_left.append([])
         hits_right.append([])
@@ -32,6 +34,10 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name):
         e1 = str2var['e1']
         e2 = str2var['e2']
         rel = str2var['rel']
+
+        batch_triples = torch.cat((e1, rel, e2), 1)
+        triples.append(batch_triples)
+
         #rel_reverse = str2var['rel_eval']
         e2_multi1 = str2var['e2_multi1'].float()
         e2_multi2 = str2var['e2_multi2'].float()
@@ -76,6 +82,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name):
             ranks.append(rank2+1)
             ranks_right.append(rank2+1)
 
+
             # this could be done more elegantly, but here you go
             for hits_level in range(10):
                 if rank1 <= hits_level:
@@ -93,6 +100,18 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name):
                     hits_right[hits_level].append(0.0)
 
         dev_rank_batcher.state.loss = [0]
+
+    triples = torch.cat(triples, dim=0)
+    ent_id_2_uri = vocab['e1']
+    rel_id_2_uri = vocab['rel']
+    eval_results_file_path = f'saved_models/eval_results_{name}_{model_name}.txt'
+    with open(eval_results_file_path, 'w') as results_out:
+        for i in range(triples.size(0)):
+            e1 = triples[i, 0].item()
+            rel = triples[i, 1].item()
+            e2 = triples[i, 2].item()
+            #print(ent_id_2_uri.get_word(e1), rel_id_2_uri.get_word(rel), ent_id_2_uri.get_word(e2), ranks_left[i], ranks_right[i])
+            results_out.write('\t'.join([ent_id_2_uri.get_word(e1), rel_id_2_uri.get_word(rel), ent_id_2_uri.get_word(e2), str(ranks_left[i]), str(ranks_right[i])]) + '\n')
 
     for i in range(10):
         log.info('Hits left @{0}: {1}'.format(i+1, np.mean(hits_left[i])))

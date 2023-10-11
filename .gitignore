@@ -6,6 +6,7 @@ saved_models
 countries
 
 data/
+!data/FB15k/type_2_relations.json
 
 create_fb15k-237c.py
 
