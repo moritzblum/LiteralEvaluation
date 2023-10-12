@@ -112,8 +112,8 @@ def main():
         test_rank_batcher = StreamBatcher(Config.dataset, 'test_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys)
 
         # Load literals
-        numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy', allow_pickle=True)
-        text_literals = np.load(f'data/{Config.dataset}/literals/text_literals.npy', allow_pickle=True)
+        numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy', allow_pickle=True).astype('float32')
+        text_literals = np.load(f'data/{Config.dataset}/literals/text_literals.npy', allow_pickle=True).astype('float32')
 
         # Normalize numerical literals
         max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
