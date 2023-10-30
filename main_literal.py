@@ -34,7 +34,7 @@ cudnn.benchmark = True
 # parse console parameters and set global variables
 Config.backend = Backends.TORCH
 Config.parse_argv(sys.argv)
-
+literal_representation = sys.argv[-1]
 Config.cuda = True
 Config.embedding_dim = 200
 #Logger.GLOBAL_LOG_LEVEL = LogLevel.DEBUG
@@ -52,7 +52,7 @@ torch.cuda.manual_seed(rseed)
 #model_name = 'DistMult_{0}_{1}'.format(Config.input_dropout, Config.dropout)
 model_name = '{2}_{0}_{1}_literal'.format(Config.input_dropout, Config.dropout, Config.model_name)
 epochs = Config.epochs
-load = True
+load = False
 if Config.dataset is None:
     Config.dataset = 'FB15k-237'
 model_path = 'saved_models/{0}_{1}.model'.format(Config.dataset, model_name)
@@ -111,13 +111,22 @@ def main():
         dev_rank_batcher = StreamBatcher(Config.dataset, 'dev_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys)
         test_rank_batcher = StreamBatcher(Config.dataset, 'test_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys)
 
-        # Load literals
-        numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy', allow_pickle=True).astype('float32')
-        text_literals = np.load(f'data/{Config.dataset}/literals/text_literals.npy', allow_pickle=True).astype('float32')
+        # Load literal Features from file (or generate them)
+        if literal_representation == 'rand':
+            numerical_literals = np.random.rand(14543, 121)
+        elif literal_representation == 'zeros':
+            numerical_literals = np.zeros((14543, 121))
+        else:
+            numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}', allow_pickle=True)
+        numerical_literals = numerical_literals.astype(np.float32)
+
+        text_literals = np.load(f'data/{Config.dataset}/literals/text_literals_org.npy', allow_pickle=True)
 
         # Normalize numerical literals
-        max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
-        numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
+        #max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
+        #numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
+
+        print(numerical_literals[111])
 
         # Load literal models
         if Config.model_name is None or Config.model_name == 'DistMult':
@@ -157,8 +166,8 @@ def main():
             print(np.array(total_param_size).sum())
             model.load_state_dict(model_params)
             model.eval()
-            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name)
-            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name)
+            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
+            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
             exit()  # added as loading is only for evaluation
         else:
             model.init()
@@ -194,8 +203,8 @@ def main():
             with torch.no_grad():
                 if epoch % 3 == 0:
                     if epoch > 0:
-                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name)
-                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name)
+                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
+                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
 
 
 if __name__ == '__main__':

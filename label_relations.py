@@ -11,9 +11,9 @@ if __name__ == '__main__':
     triples = []
 
     #dataset_path = "./data/FB15k/"
-    #dataset_path = "./datasets/FB15k-237/"
+    dataset_path = "./datasets/FB15k-237/"
     #dataset_path = "./datasets/YAGO3-10/"
-    dataset_path = "./datasets/WN18RR/"
+    #dataset_path = "./datasets/WN18RR/"
 
 
     for split in ['train', 'valid', 'test']:

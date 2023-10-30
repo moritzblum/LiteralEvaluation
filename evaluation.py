@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-import datetime
+from datetime import datetime
 
 from spodernet.utils.global_config import Config
 from spodernet.utils.cuda_utils import CUDATimer
@@ -9,9 +9,9 @@ from torch.autograd import Variable
 from sklearn import metrics
 
 #timer = CUDATimer()
-log = Logger('evaluation{0}.py.txt'.format(datetime.datetime.now()))
+log = Logger('evaluation{0}.py.txt'.format(datetime.now()))
 
-def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name):
+def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name, literal_representation):
 
     log.info('')
     log.info('-'*50)
@@ -104,7 +104,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name):
     triples = torch.cat(triples, dim=0)
     ent_id_2_uri = vocab['e1']
     rel_id_2_uri = vocab['rel']
-    eval_results_file_path = f'saved_models/eval_results_{name}_{model_name}.txt'
+    eval_results_file_path = f'saved_models/eval_results_{name}_{model_name}_{literal_representation}_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.tsv'
     with open(eval_results_file_path, 'w') as results_out:
         for i in range(triples.size(0)):
             e1 = triples[i, 0].item()
