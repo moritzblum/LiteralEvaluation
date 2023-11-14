@@ -144,8 +144,8 @@ def main():
         print(np.array(total_param_size).sum())
         model.load_state_dict(model_params)
         model.eval()
-        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
-        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
+        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name, 'standard')
+        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name, 'standard')
     else:
         model.init()
 
@@ -177,10 +177,10 @@ def main():
         torch.save(model.state_dict(), model_path)
 
         model.eval()
-        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
+        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name, 'standard')
         if epoch % 3 == 0:
             if epoch > 0:
-                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
+                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name, 'standard')
 
 
 if __name__ == '__main__':

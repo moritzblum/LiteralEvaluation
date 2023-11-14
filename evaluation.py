@@ -104,7 +104,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name, literal_r
     triples = torch.cat(triples, dim=0)
     ent_id_2_uri = vocab['e1']
     rel_id_2_uri = vocab['rel']
-    eval_results_file_path = f'saved_models/eval_results_{name}_{model_name}_{literal_representation}_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.tsv'
+    eval_results_file_path = f'saved_models/eval_results_{name}_{model_name}_{literal_representation}.tsv'
     with open(eval_results_file_path, 'w') as results_out:
         for i in range(triples.size(0)):
             e1 = triples[i, 0].item()

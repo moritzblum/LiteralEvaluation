@@ -38,8 +38,8 @@ if not os.path.exists(bin_dir):
     os.makedirs(bin_dir)
 
 # Load dictionary
-vocab_e = np.load(f'{str(Path.home())}/.data/{args.dataset}/vocab_e1')
-vocab_r = np.load(f'{str(Path.home())}/.data/{args.dataset}/vocab_rel')
+vocab_e = np.load(f'{str(Path.home())}/.data/{args.dataset}/vocab_e1', allow_pickle=True)
+vocab_r = np.load(f'{str(Path.home())}/.data/{args.dataset}/vocab_rel', allow_pickle=True)
 
 ent2idx = vocab_e[0]
 rel2idx = vocab_r[0]

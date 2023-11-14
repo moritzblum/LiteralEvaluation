@@ -11,7 +11,7 @@ from os.path import join
 import torch.backends.cudnn as cudnn
 
 from evaluation import ranking_and_hits
-from model import KBLN, ComplExKBLN
+from model import KBLN#, ComplExKBLN
 
 from spodernet.preprocessing.pipeline import Pipeline, DatasetStreamer
 from spodernet.preprocessing.processors import JsonLoaderProcessors, Tokenizer, AddToVocab, SaveLengthsToState, StreamToHDF5, SaveMaxLengthsToState, CustomTokenizer
@@ -34,7 +34,7 @@ cudnn.benchmark = True
 # parse console parameters and set global variables
 Config.backend = Backends.TORCH
 Config.parse_argv(sys.argv)
-
+literal_representation = sys.argv[-1]
 Config.cuda = True
 Config.embedding_dim = 200
 #Logger.GLOBAL_LOG_LEVEL = LogLevel.DEBUG
@@ -111,8 +111,17 @@ def main():
     dev_rank_batcher = StreamBatcher(Config.dataset, 'dev_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys, is_volatile=True)
     test_rank_batcher = StreamBatcher(Config.dataset, 'test_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys, is_volatile=True)
 
-    # Load literals
-    numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy')
+    if literal_representation == 'rand':
+        numerical_literals = np.random.rand(14543, 121)
+    elif literal_representation == 'zeros':
+        numerical_literals = np.zeros((14543, 121))
+    else:
+        numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}',
+                                     allow_pickle=True)
+    numerical_literals = numerical_literals.astype(np.float32)
+
+
+
 
     # Initialize KBLN RBF parameters
     X_train = np.load(f'data/{Config.dataset}/bin/train.npy')
@@ -155,8 +164,8 @@ def main():
         print(np.array(total_param_size).sum())
         model.load_state_dict(model_params)
         model.eval()
-        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
-        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
+        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
+        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
     else:
         model.init()
 
@@ -190,8 +199,8 @@ def main():
         model.eval()
         if epoch % 3 == 0:
             if epoch > 0:
-                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
-                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
+                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
+                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
 
 
 if __name__ == '__main__':
