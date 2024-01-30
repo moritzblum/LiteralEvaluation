@@ -34,7 +34,10 @@ cudnn.benchmark = True
 # parse console parameters and set global variables
 Config.backend = Backends.TORCH
 Config.parse_argv(sys.argv)
-literal_representation = sys.argv[-1]
+literal_representation, ablation = sys.argv[-1].split('*')  # e.g. random*train_pruned_0.2
+print('literal_representation:', literal_representation)
+print('ablation:', ablation)
+
 Config.cuda = True
 Config.embedding_dim = 200
 #Logger.GLOBAL_LOG_LEVEL = LogLevel.DEBUG
@@ -42,7 +45,7 @@ Config.embedding_dim = 200
 
 # Random seed
 from datetime import datetime
-rseed = int(datetime.now().timestamp())
+rseed = 5 #int(datetime.now().timestamp())
 print(f'Random seed: {rseed}')
 np.random.seed(rseed)
 torch.manual_seed(rseed)
@@ -57,11 +60,12 @@ if Config.dataset is None:
     Config.dataset = 'FB15k-237'
 model_path = 'saved_models/{0}_{1}.model'.format(Config.dataset, model_name)
 
+train_file_name = ablation
 
 ''' Preprocess knowledge graph using spodernet. '''
 def preprocess(dataset_name, delete_data=False):
     full_path = 'data/{0}/e1rel_to_e2_full.json'.format(dataset_name)
-    train_path = 'data/{0}/e1rel_to_e2_train.json'.format(dataset_name)
+    train_path = 'data/{0}/e1rel_to_e2_{1}.json'.format(dataset_name, train_file_name)
     dev_ranking_path = 'data/{0}/e1rel_to_e2_ranking_dev.json'.format(dataset_name)
     test_ranking_path = 'data/{0}/e1rel_to_e2_ranking_test.json'.format(dataset_name)
 
@@ -87,7 +91,7 @@ def preprocess(dataset_name, delete_data=False):
 
     # process train, dev and test sets and save them to hdf5
     p.skip_transformation = False
-    for path, name in zip([train_path, dev_ranking_path, test_ranking_path], ['train', 'dev_ranking', 'test_ranking']):
+    for path, name in zip([train_path, dev_ranking_path, test_ranking_path], [train_file_name, 'dev_ranking', 'test_ranking']):
         d.set_path(path)
         p.clear_processors()
         p.add_sent_processor(ToLower())
@@ -107,24 +111,26 @@ def main():
     if Config.epochs != 0:
         num_entities = vocab['e1'].num_token
 
-        train_batcher = StreamBatcher(Config.dataset, 'train', Config.batch_size, randomize=True, keys=input_keys)
+        train_batcher = StreamBatcher(Config.dataset, train_file_name, Config.batch_size, randomize=True, keys=input_keys)
         dev_rank_batcher = StreamBatcher(Config.dataset, 'dev_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys)
         test_rank_batcher = StreamBatcher(Config.dataset, 'test_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys)
 
+        num_features = {'FB15k-237': 121, 'YAGO3-10': 5, 'Synthetic': 1, 'LitWD48K': 246}  # LitWD48K for decimal values
         # Load literal Features from file (or generate them)
         if literal_representation == 'rand':
-            numerical_literals = np.random.rand(14543, 121)
+            numerical_literals = np.random.rand(num_entities, num_features[Config.dataset])
         elif literal_representation == 'zeros':
-            numerical_literals = np.zeros((14543, 121))
+            numerical_literals = np.zeros((num_entities, num_features[Config.dataset]))
         else:
             numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}', allow_pickle=True)
         numerical_literals = numerical_literals.astype(np.float32)
 
-        text_literals = np.load(f'data/{Config.dataset}/literals/text_literals_org.npy', allow_pickle=True)
+        #text_literals = np.load(f'data/{Config.dataset}/literals/text_literals_org.npy', allow_pickle=True)
 
         # Normalize numerical literals
-        #max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
-        #numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
+        if '_org' in literal_representation:
+            max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
+            numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
 
         print(numerical_literals[111])
 
@@ -148,10 +154,10 @@ def main():
 
         train_batcher.at_batch_prepared_observers.insert(1,TargetIdx2MultiTarget(num_entities, 'e2_multi1', 'e2_multi1_binary'))
 
-        eta = ETAHook('train', print_every_x_batches=100)
+        eta = ETAHook(train_file_name, print_every_x_batches=100)
         train_batcher.subscribe_to_events(eta)
         train_batcher.subscribe_to_start_of_epoch_event(eta)
-        train_batcher.subscribe_to_events(LossHook('train', print_every_x_batches=100))
+        train_batcher.subscribe_to_events(LossHook(train_file_name, print_every_x_batches=100))
 
         if Config.cuda:
             model.cuda()

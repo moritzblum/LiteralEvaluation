@@ -27,7 +27,11 @@ print('Processing dataset {0}'.format(dataset_name))
 
 rdm = np.random.RandomState(2342423)
 base_path = 'data/{0}/'.format(dataset_name)
-files = ['train.txt', 'valid.txt', 'test.txt']
+
+if dataset_name == 'FB15k-237':
+    files = ['train.txt', 'valid.txt', 'test.txt', 'train_pruned_0.1.txt', 'train_pruned_0.2.txt', 'train_pruned_0.3.txt', 'train_pruned_0.4.txt', 'train_pruned_0.5.txt', 'train_pruned_0.6.txt', 'train_pruned_0.7.txt', 'train_pruned_0.8.txt', 'train_pruned_0.9.txt']
+else:
+    files = ['train.txt', 'valid.txt', 'test.txt']
 
 data = []
 for p in files:
@@ -138,7 +142,14 @@ def write_e1rel_ranking_graph(cases, graph, path):
 
 
 all_cases = test_cases['train.txt'] + test_cases['valid.txt'] + test_cases['test.txt']
-write_e1rel_graph(test_cases['train.txt'], d_egraph_sets['train.txt'], 'data/{0}/e1rel_to_e2_train.json'.format(dataset_name))
+
+if dataset_name == 'FB15k-237':
+    for p in ['train', 'train_pruned_0.1', 'train_pruned_0.2', 'train_pruned_0.3', 'train_pruned_0.4', 'train_pruned_0.5', 'train_pruned_0.6', 'train_pruned_0.7', 'train_pruned_0.8', 'train_pruned_0.9']:
+        write_e1rel_graph(test_cases[p + '.txt'], d_egraph_sets[p + '.txt'], 'data/{0}/e1rel_to_e2_{1}.json'.format(dataset_name, p))
+else:
+    write_e1rel_graph(test_cases['train.txt'], d_egraph, 'data/{0}/e1rel_to_e2_train.json'.format(dataset_name))
+
+
 write_e1rel_ranking_graph(test_cases['valid.txt'], d_egraph, join('data/{0}/e1rel_to_e2_ranking_dev.json'.format(dataset_name)))
 write_e1rel_ranking_graph(test_cases['test.txt'], d_egraph, 'data/{0}/e1rel_to_e2_ranking_test.json'.format(dataset_name))
 write_e1rel_graph(all_cases, d_egraph, 'data/{0}/e1rel_to_e2_full.json'.format(dataset_name))

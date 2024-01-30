@@ -34,6 +34,7 @@ cudnn.benchmark = True
 # parse console parameters and set global variables
 Config.backend = Backends.TORCH
 Config.parse_argv(sys.argv)
+literal_representation, ablation = sys.argv[-1].split('*')  # e.g. rand*train_pruned_0.2
 
 Config.cuda = True
 Config.embedding_dim = 200
@@ -42,8 +43,7 @@ Config.embedding_dim = 200
 
 # Random seed
 from datetime import datetime
-rseed = int(datetime.now().timestamp())
-print(f'Random seed: {rseed}')
+rseed = 5 #int(datetime.now().timestamp())print(f'Random seed: {rseed}')
 np.random.seed(rseed)
 torch.manual_seed(rseed)
 torch.cuda.manual_seed(rseed)
@@ -99,6 +99,7 @@ def preprocess(dataset_name, delete_data=False):
 
 
 def main():
+
     if Config.process: preprocess(Config.dataset, delete_data=True)
     input_keys = ['e1', 'rel', 'e2', 'e2_multi1', 'e2_multi2']
     p = Pipeline(Config.dataset, keys=input_keys)
@@ -112,11 +113,26 @@ def main():
     test_rank_batcher = StreamBatcher(Config.dataset, 'test_ranking', Config.batch_size, randomize=False, loader_threads=4, keys=input_keys, is_volatile=True)
 
     # Load literals
-    numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy')
+    #numerical_literals = np.load(f'data/{Config.dataset}/literals/numerical_literals.npy')
+
+    num_features = {'FB15k-237': 121, 'YAGO3-10': 5, 'Synthetic': 1,
+                    'LitWD48K': 246}  # LitWD48K for decimal values
+
+    # Load literal Features from file (or generate them)
+    if literal_representation == 'rand':
+        numerical_literals = np.random.rand(num_entities, num_features[Config.dataset])
+    elif literal_representation == 'zeros':
+        numerical_literals = np.zeros((num_entities, num_features[Config.dataset]))
+    else:
+        numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}',
+                                     allow_pickle=True)
+    numerical_literals = numerical_literals.astype(np.float32)
+
+    #text_literals = np.load(f'data/{Config.dataset}/literals/text_literals_org.npy', allow_pickle=True)
 
     # Normalize literals
-    max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
-    numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
+    #max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
+    #numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
 
     # Load Multitask models
     model = MTKGNN_DistMult(vocab['e1'].num_token, vocab['rel'].num_token, numerical_literals)
@@ -141,8 +157,8 @@ def main():
         print(np.array(total_param_size).sum())
         model.load_state_dict(model_params)
         model.eval()
-        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
-        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
+        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
+        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
     else:
         model.init()
 
@@ -197,8 +213,8 @@ def main():
 
         if epoch % 3 == 0:
             if epoch > 0:
-                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation')
-                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation')
+                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
+                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
 
 
 if __name__ == '__main__':
