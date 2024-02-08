@@ -14,7 +14,7 @@ data/*
 data/*/*
 !data/*/literals/
 !data/*/vocab_e1
-!data/Synthetic/literals/
+!data/Synthetic/*
 
 create_fb15k-237c.py
 
