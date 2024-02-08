@@ -98,7 +98,7 @@ def preprocess(dataset_name, delete_data=False):
 
 
 def main():
-    if Config.process: preprocess(Config.dataset, delete_data=True)
+    if Config.process: preprocess(Config.dataset, delete_data=False)
     input_keys = ['e1', 'rel', 'e2', 'e2_multi1', 'e2_multi2']
     p = Pipeline(Config.dataset, keys=input_keys)
     p.load_vocabs()
@@ -120,6 +120,8 @@ def main():
     else:
         numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}',
                                      allow_pickle=True)
+        max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
+        numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
     numerical_literals = numerical_literals.astype(np.float32)
 
 
@@ -135,8 +137,8 @@ def main():
     var = np.var(n, axis=0) + 1e-6  # size: (n_literals), added eps to avoid degenerate case
 
     # Get normalized literals (for LiteralE)
-    max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
-    numerical_literals_normalized = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
+    #max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
+    #numerical_literals_normalized = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
 
     # Load literal models
     if Config.model_name is None or Config.model_name == 'KBLN':

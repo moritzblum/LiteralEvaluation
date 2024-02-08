@@ -1,4 +1,10 @@
 # LiteralE
+
+## ToDo
+* Add literal pre-processing to slurm scripts
+* Add TransEA to slurm scripts
+
+
 Knowledge Graph Embeddings learned from the structure and literals of knowledge graphs.
 
 ArXiv link for the paper: [Incorporating Literals into Knowledge Graph Embeddings](https://arxiv.org/abs/1802.00934)

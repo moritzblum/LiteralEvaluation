@@ -123,15 +123,10 @@ def main():
             numerical_literals = np.zeros((num_entities, num_features[Config.dataset]))
         else:
             numerical_literals = np.load(f'data/{Config.dataset}/literals/{literal_representation}', allow_pickle=True)
-        numerical_literals = numerical_literals.astype(np.float32)
-
-        #text_literals = np.load(f'data/{Config.dataset}/literals/text_literals_org.npy', allow_pickle=True)
-
-        # Normalize numerical literals
-        if '_org' in literal_representation:
             max_lit, min_lit = np.max(numerical_literals, axis=0), np.min(numerical_literals, axis=0)
             numerical_literals = (numerical_literals - min_lit) / (max_lit - min_lit + 1e-8)
 
+        numerical_literals = numerical_literals.astype(np.float32)
         print(numerical_literals[111])
 
         # Load literal models

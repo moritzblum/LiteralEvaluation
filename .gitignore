@@ -8,6 +8,11 @@ countries
 data/
 !data/FB15k/type_2_relations.json
 
+!data/*/literals/*.npy
+!data/*/vocab_e1
+
+!data/FB15k-237/literals/
+
 create_fb15k-237c.py
 
 .DS_Store

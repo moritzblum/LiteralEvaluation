@@ -19,9 +19,6 @@ if len(sys.argv) > 1:
     dataset_name = sys.argv[1]
 else:
     dataset_name = 'FB15k-237'
-    #dataset_name = 'FB15k'
-    #dataset_name = 'yago'
-    #dataset_name = 'WN18RR'
 
 print('Processing dataset {0}'.format(dataset_name))
 
@@ -147,7 +144,7 @@ if dataset_name == 'FB15k-237':
     for p in ['train', 'train_pruned_0.1', 'train_pruned_0.2', 'train_pruned_0.3', 'train_pruned_0.4', 'train_pruned_0.5', 'train_pruned_0.6', 'train_pruned_0.7', 'train_pruned_0.8', 'train_pruned_0.9']:
         write_e1rel_graph(test_cases[p + '.txt'], d_egraph_sets[p + '.txt'], 'data/{0}/e1rel_to_e2_{1}.json'.format(dataset_name, p))
 else:
-    write_e1rel_graph(test_cases['train.txt'], d_egraph, 'data/{0}/e1rel_to_e2_train.json'.format(dataset_name))
+    write_e1rel_graph(test_cases['train.txt'], d_egraph_sets['train.txt'], 'data/{0}/e1rel_to_e2_train.json'.format(dataset_name))
 
 
 write_e1rel_ranking_graph(test_cases['valid.txt'], d_egraph, join('data/{0}/e1rel_to_e2_ranking_dev.json'.format(dataset_name)))
