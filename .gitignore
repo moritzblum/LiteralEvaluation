@@ -18,5 +18,6 @@ data/*/*
 
 create_fb15k-237c.py
 
-.DS_Store
+
+**/.DS_Store
 .ropeproject/
