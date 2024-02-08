@@ -5,13 +5,16 @@ src/
 saved_models
 countries
 
-data/
-!data/FB15k/type_2_relations.json
+data/*
+!data/FB15k-237/
+!data/LitWD48K/
+!data/YAGO3-10/
+!data/Synthetic/
 
-!data/*/literals/*.npy
+data/*/*
+!data/*/literals/
 !data/*/vocab_e1
-
-!data/FB15k-237/literals/
+!data/Synthetic/literals/
 
 create_fb15k-237c.py
 
