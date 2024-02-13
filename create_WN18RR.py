@@ -29,8 +29,8 @@ def write_triples(triples, path):
             f.write('{}\t{}\t{}\n'.format(s, p, o))
 
 train_triples = read_triples('original/wordnet-mlj12-train.txt')
-valid_triples = read_triples('original/wordnet-mlj12-valid.txt')
-test_triples = read_triples('original/wordnet-mlj12-test.txt')
+valid_triples = read_triples('original/wordnet-mlj12-valid_rich.txt')
+test_triples = read_triples('original/wordnet-mlj12-test_rich.txt')
 
 filtered_train_triples = [(s, p, o) for (s, p, o) in train_triples if p not in predicates_to_remove]
 filtered_valid_triples = [(s, p, o) for (s, p, o) in valid_triples if p not in predicates_to_remove]

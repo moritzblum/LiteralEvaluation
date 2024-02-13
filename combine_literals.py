@@ -1,5 +1,5 @@
 
-filename1 = 'data/FB15k/literals/numerical_literals.txt'
+filename1 = 'data/FB15k/literals/numerical_literals_rich.txt'
 filename2 = 'data/FB15k/literals/FB15K_NumericalTriples.txt'
 triples1 = [line.strip().split('\t') for line in open(filename1,'r')]
 literal_relation = list(set(list(zip(*triples1))[1]))

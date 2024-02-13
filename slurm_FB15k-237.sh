@@ -29,10 +29,10 @@ python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embeddi
 python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_fb15k-237_rand.txt
 
 python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train" >  ~/LiteralEvaluation/results/slurm_kbln_fb15k-237_org.txt
-python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/slurm_kbln_fb15k-237_rand.txt
+python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_kbln_fb15k-237_rand.txt
 
-python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train" > ~/LiteralEvaluation/slurm_multitask_fb15k-237_org.txt
-python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/slurm_multitask_fb15k-237_rand.txt
+python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train" > ~/LiteralEvaluation/results/slurm_multitask_fb15k-237_org.txt
+python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_multitask_fb15k-237_rand.txt
 
 
 # --- Table: Comparison of different features derived from the origial numerical features ---
@@ -46,17 +46,17 @@ python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim
 
 
 # --- Table: MRR score after removing a certain percentage of relational triples ---
-declare -a arr=("10" "20" "30", "40", "50", "60", "70", "80", "90")
+declare -a arr=("10" "20" "30" "40" "50" "60" "70" "80" "90")
 for i in "${arr[@]}"
 do
-  python -u main_literal.py dataset FB15k-237 model DistMult input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train_pruned_$i" > ~/LiteralEvaluation/slurm_literaledistmult_fb15k-237_org_$i.txt
-  python -u main_literal.py dataset FB15k-237 model DistMult input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train_pruned_$i" > ~/LiteralEvaluation/slurm_literaledistmult_fb15k-237_rand_$i.txt
+  python -u main_literal.py dataset FB15k-237 model DistMult input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train_pruned_$i" > ~/LiteralEvaluation/results/slurm_literaledistmult_fb15k-237_org_$i.txt
+  python -u main_literal.py dataset FB15k-237 model DistMult input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train_pruned_$i" > ~/LiteralEvaluation/results/slurm_literaledistmult_fb15k-237_rand_$i.txt
 done
 
 for i in "${arr[@]}"
 do
-  python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train_pruned_$i" > ~/LiteralEvaluation/slurm_multitask_fb15k-237_org_$i.txt
-  python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train_pruned_$i" > ~/LiteralEvaluation/slurm_multitask_fb15k-237_rand_$i.txt
+  python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train_pruned_$i" > ~/LiteralEvaluation/results/slurm_multitask_fb15k-237_org_$i.txt
+  python -u main_multitask.py dataset FB15k-237 input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train_pruned_$i" > ~/LiteralEvaluation/results/slurm_multitask_fb15k-237_rand_$i.txt
 done
 
 

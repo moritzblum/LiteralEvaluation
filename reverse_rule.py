@@ -25,7 +25,7 @@ else:
 print(threshold)
 
 base_path = 'data/{0}/'.format(dataset_name)
-files = ['train.txt', 'valid.txt', 'test.txt']
+files = ['train.txt', 'valid_rich.txt', 'test_rich.txt']
 
 data = []
 for p in files:
@@ -105,7 +105,7 @@ evaluate = True
 if evaluate:
     all_cases = []
     rel2tuples = {}
-    train_dev = test_cases['train.txt'] + test_cases['valid.txt']
+    train_dev = test_cases['train.txt'] + test_cases['valid_rich.txt']
     for e1, rel, e2 in train_dev:
         if rel not in rel2tuples: rel2tuples[rel] = set()
         rel2tuples[rel].add((e1, e2))
@@ -116,7 +116,7 @@ if evaluate:
 
     num_entities = len(e_set)
     ranks = []
-    for i, (e1, rel, e2) in enumerate(test_cases['test.txt']):
+    for i, (e1, rel, e2) in enumerate(test_cases['test_rich.txt']):
         if i % 1000 == 0: print(i)
         if rel in rel2reversal_rel:
             rel2 = rel2reversal_rel[rel]

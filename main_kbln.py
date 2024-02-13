@@ -168,8 +168,8 @@ def main():
         print(np.array(total_param_size).sum())
         model.load_state_dict(model_params)
         model.eval()
-        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
-        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
+        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=ablation)
+        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=ablation)
     else:
         model.init()
 
@@ -203,8 +203,8 @@ def main():
         model.eval()
         if epoch % 3 == 0:
             if epoch > 0:
-                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
-                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
+                ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=ablation)
+                ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=ablation)
 
 
 if __name__ == '__main__':

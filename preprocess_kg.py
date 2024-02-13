@@ -45,8 +45,8 @@ ent2idx = vocab_e[0]
 rel2idx = vocab_r[0]
 
 train_path = '{}/train.txt'.format(dataset_dir)
-val_path = '{}/valid.txt'.format(dataset_dir)
-test_path = '{}/test.txt'.format(dataset_dir)
+val_path = '{}/valid_rich.txt'.format(dataset_dir)
+test_path = '{}/test_rich.txt'.format(dataset_dir)
 
 X_train = load_data(train_path, ent2idx, rel2idx).astype(np.int32)
 X_val = load_data(val_path, ent2idx, rel2idx).astype(np.int32)

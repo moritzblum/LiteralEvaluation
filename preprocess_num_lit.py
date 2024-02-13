@@ -19,7 +19,7 @@ vocab = np.load(f'{str(Path.home())}/.data/{args.dataset}/vocab_e1', allow_pickl
 ent2idx = vocab[0]
 idx2ent = vocab[1]
 
-numerical_literals_files = ['numerical_literals.txt'] if args.dataset != 'LitWD48K' else ['numerical_literals_decimal.txt', 'numerical_literals_double.txt']
+numerical_literals_files = ['numerical_literals_rich.txt'] if args.dataset != 'LitWD48K' else ['numerical_literals_decimal.txt', 'numerical_literals_double.txt']
 
 for numerical_literals_file in numerical_literals_files:
     # Load raw literals

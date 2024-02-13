@@ -34,7 +34,7 @@ cudnn.benchmark = True
 # parse console parameters and set global variables
 Config.backend = Backends.TORCH
 Config.parse_argv(sys.argv)
-literal_representation, ablation = sys.argv[-1].split('*')  # e.g. random*train_pruned_0.2
+literal_representation, ablation = sys.argv[-1].split('*')  # e.g. random*train_pruned_20
 print('literal_representation:', literal_representation)
 print('ablation:', ablation)
 
@@ -167,8 +167,8 @@ def main():
             print(np.array(total_param_size).sum())
             model.load_state_dict(model_params)
             model.eval()
-            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
-            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
+            ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=train_file_name)
+            ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=train_file_name)
             exit()  # added as loading is only for evaluation
         else:
             model.init()
@@ -204,8 +204,8 @@ def main():
             with torch.no_grad():
                 if epoch % 3 == 0:
                     if epoch > 0:
-                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation)
-                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation)
+                        ranking_and_hits(model, dev_rank_batcher, vocab, 'dev_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=train_file_name)
+                        ranking_and_hits(model, test_rank_batcher, vocab, 'test_evaluation', model_name=model_name, literal_representation=literal_representation, dataset=Config.dataset, train_ablation=train_file_name)
 
 
 if __name__ == '__main__':
