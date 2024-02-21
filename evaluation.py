@@ -24,6 +24,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name, literal_r
     ranks = []
     ranks_left = []
     ranks_right = []
+    scores = []
     triples = []
     for i in range(10):
         hits_left.append([])
@@ -65,22 +66,31 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name, literal_r
 
 
         # sort and rank
-        max_values, argsort1 = torch.sort(pred1, 1, descending=True)
-        max_values, argsort2 = torch.sort(pred2, 1, descending=True)
+        max_values1, argsort1 = torch.sort(pred1, 1, descending=True)
+        max_values2, argsort2 = torch.sort(pred2, 1, descending=True)
 
         argsort1 = argsort1.cpu().numpy()
         argsort2 = argsort2.cpu().numpy()
+        max_values1 = max_values1.cpu().numpy()
+        max_values2 = max_values2.cpu().numpy()
+
         e1 = e1.cpu().numpy()
         e2 = e2.cpu().numpy()
         for i in range(Config.batch_size):
             # find the rank of the target entities
             rank1 = np.where(argsort1[i]==e2[i, 0])[0][0]
+            score1 = pred1[i][e2[i, 0]]
+
             rank2 = np.where(argsort2[i]==e1[i, 0])[0][0]
+            score2 = pred2[i][e1[i, 0]]
+
             # rank+1, since the lowest rank is rank 1 not rank 0
             ranks.append(rank1+1)
             ranks_left.append(rank1+1)
             ranks.append(rank2+1)
             ranks_right.append(rank2+1)
+            scores.append(score1.cpu().item()) # is equal to score2
+
 
 
             # this could be done more elegantly, but here you go
@@ -112,7 +122,7 @@ def ranking_and_hits(model, dev_rank_batcher, vocab, name, model_name, literal_r
             rel = triples[i, 1].item()
             e2 = triples[i, 2].item()
             #print(ent_id_2_uri.get_word(e1), rel_id_2_uri.get_word(rel), ent_id_2_uri.get_word(e2), ranks_left[i], ranks_right[i])
-            results_out.write('\t'.join([ent_id_2_uri.get_word(e1), rel_id_2_uri.get_word(rel), ent_id_2_uri.get_word(e2), str(ranks_left[i]), str(ranks_right[i])]) + '\n')
+            results_out.write('\t'.join([ent_id_2_uri.get_word(e1), rel_id_2_uri.get_word(rel), ent_id_2_uri.get_word(e2), str(ranks_left[i]), str(ranks_right[i]), str(scores[i])]) + '\n')
 
     for i in range(10):
         log.info('Hits left @{0}: {1}'.format(i+1, np.mean(hits_left[i])))

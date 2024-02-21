@@ -21,3 +21,5 @@ create_fb15k-237c.py
 
 **/.DS_Store
 .ropeproject/
+.idea/
+

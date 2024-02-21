@@ -27,3 +27,9 @@ python -u main_literal.py dataset Synthetic model ComplEx input_drop 0.2 embeddi
 python -u main_kbln.py dataset Synthetic model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train" > ~/LiteralEvaluation/results/slurm_kbln_synthetic_org.txt
 python -u main_multitask.py dataset Synthetic input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals.npy*train" > ~/LiteralEvaluation/results/slurm_multitask_synthetic_org.txt
 
+python -u main_literal.py dataset Synthetic model DistMult input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_literaledistmult_synthetic_rand.txt
+python -u main_literal.py dataset Synthetic model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_synthetic_rand.txt
+python -u main_kbln.py dataset Synthetic model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_kbln_synthetic_rand.txt
+python -u main_multitask.py dataset Synthetic input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "rand*train" > ~/LiteralEvaluation/results/slurm_multitask_synthetic_rand.txt
+
+

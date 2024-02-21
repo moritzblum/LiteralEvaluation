@@ -59,6 +59,7 @@ load = False
 if Config.dataset is None:
     Config.dataset = 'FB15k-237'
 model_path = 'saved_models/{0}_{1}.model'.format(Config.dataset, model_name)
+#model_path = 'saved_models/LitWD48K_DistMult_0.2_0.0_literal.model'
 
 train_file_name = ablation
 
