@@ -41,7 +41,7 @@ class Querier(object):
             {}
         }}""".format(entity, "FILTER (isLiteral(?o))")
         res = self._exec_query(query)
-        results = res["results"]["bindings"]
+        results = res["results_run_2"]["bindings"]
         alltriples = []
         literaltriples = []
         uritriples = []

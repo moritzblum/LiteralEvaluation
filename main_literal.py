@@ -45,7 +45,7 @@ Config.embedding_dim = 200
 
 # Random seed
 from datetime import datetime
-rseed = 5 #int(datetime.now().timestamp())
+rseed = int(datetime.now().timestamp())
 print(f'Random seed: {rseed}')
 np.random.seed(rseed)
 torch.manual_seed(rseed)

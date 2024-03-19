@@ -10,8 +10,8 @@ E = weights['emb_e.weight'].numpy()
 dists = squareform(pdist(E))
 vals = np.sort(dists)[:, :10]
 idxs = np.argsort(dists)[:, :10]
-np.save('results/NN/distmult_nn_vals.npy', vals)
-np.save('results/NN/distmult_nn_idxs.npy', idxs)
+np.save('results_run_2/NN/distmult_nn_vals.npy', vals)
+np.save('results_run_2/NN/distmult_nn_idxs.npy', idxs)
 
 
 # KBLN
@@ -20,8 +20,8 @@ E = weights['emb_e.weight'].numpy()
 dists = squareform(pdist(E))
 vals = np.sort(dists)[:, :10]
 idxs = np.argsort(dists)[:, :10]
-np.save('results/NN/kbln_nn_vals.npy', vals)
-np.save('results/NN/kbln_nn_idxs.npy', idxs)
+np.save('results_run_2/NN/kbln_nn_vals.npy', vals)
+np.save('results_run_2/NN/kbln_nn_idxs.npy', idxs)
 
 
 # MTKGNN
@@ -30,8 +30,8 @@ E = weights['emb_e.weight'].numpy()
 dists = squareform(pdist(E))
 vals = np.sort(dists)[:, :10]
 idxs = np.argsort(dists)[:, :10]
-np.save('results/NN/mtkgnn_nn_vals.npy', vals)
-np.save('results/NN/mtkgnn_nn_idxs.npy', idxs)
+np.save('results_run_2/NN/mtkgnn_nn_vals.npy', vals)
+np.save('results_run_2/NN/mtkgnn_nn_idxs.npy', idxs)
 
 
 # Literals only
@@ -41,8 +41,8 @@ num_lits = (num_lits - min_lit) / (max_lit - min_lit + 1e-8)
 dists = squareform(pdist(num_lits))
 vals = np.sort(dists)[:, :10]
 idxs = np.argsort(dists)[:, :10]
-np.save('results/NN/literals_only_nn_vals.npy', vals)
-np.save('results/NN/literals_only_nn_idxs.npy', idxs)
+np.save('results_run_2/NN/literals_only_nn_vals.npy', vals)
+np.save('results_run_2/NN/literals_only_nn_idxs.npy', idxs)
 
 
 # LiteralE
@@ -57,5 +57,5 @@ E = model.emb_num_lit(model.emb_e.weight, model.numerical_literals).cpu().data.n
 dists = squareform(pdist(E))
 vals = np.sort(dists)[:, :10]
 idxs = np.argsort(dists)[:, :10]
-np.save('results/NN/literale_nn_vals.npy', vals)
-np.save('results/NN/literale_nn_idxs.npy', idxs)
+np.save('results_run_2/NN/literale_nn_vals.npy', vals)
+np.save('results_run_2/NN/literale_nn_idxs.npy', idxs)

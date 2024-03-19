@@ -8,14 +8,14 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--ent', metavar='',)
 args = parser.parse_args()
 
-distmult_nn_idx = np.load('results/NN/distmult_nn_idxs.npy')
-distmult_nn_val = np.load('results/NN/distmult_nn_vals.npy')
-kbln_nn_idx = np.load('results/NN/kbln_nn_idxs.npy')
-kbln_nn_val = np.load('results/NN/kbln_nn_vals.npy')
-mtkgnn_nn_idx = np.load('results/NN/mtkgnn_nn_idxs.npy')
-mtkgnn_nn_val = np.load('results/NN/mtkgnn_nn_vals.npy')
-literale_nn_val = np.load('results/NN/literale_nn_vals.npy')
-literale_nn_idx = np.load('results/NN/literale_nn_idxs.npy')
+distmult_nn_idx = np.load('results_run_2/NN/distmult_nn_idxs.npy')
+distmult_nn_val = np.load('results_run_2/NN/distmult_nn_vals.npy')
+kbln_nn_idx = np.load('results_run_2/NN/kbln_nn_idxs.npy')
+kbln_nn_val = np.load('results_run_2/NN/kbln_nn_vals.npy')
+mtkgnn_nn_idx = np.load('results_run_2/NN/mtkgnn_nn_idxs.npy')
+mtkgnn_nn_val = np.load('results_run_2/NN/mtkgnn_nn_vals.npy')
+literale_nn_val = np.load('results_run_2/NN/literale_nn_vals.npy')
+literale_nn_idx = np.load('results_run_2/NN/literale_nn_idxs.npy')
 
 vocab = np.load('vocab_e1')
 ent2idx = vocab[0]
@@ -66,8 +66,8 @@ for idx, val in zip(dm_nn_idx, dm_nn_val):
 
 print('\nLiterals Nearest Neighbor')
 print('--------------------------')
-literal_nn_val = np.load('results/NN/literals_only_nn_vals.npy')
-literal_nn_idx = np.load('results/NN/literals_only_nn_idxs.npy')
+literal_nn_val = np.load('results_run_2/NN/literals_only_nn_vals.npy')
+literal_nn_idx = np.load('results_run_2/NN/literals_only_nn_idxs.npy')
 
 le_nn_idx = literal_nn_idx[ent2idx[fb_ent]]
 le_nn_val = literal_nn_val[ent2idx[fb_ent]]
