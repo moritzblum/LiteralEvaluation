@@ -1,17 +1,21 @@
 # LiteralE
 
-## ToDo
-* Add literal pre-processing to slurm scripts
-* Add TransEA to slurm scripts
+Evaluation of Link Prediction Models that incorporate numerical literals. 
 
+Figure 1: ![Example KG](./data/tex/example_eiffel_tower.png)
 
-Knowledge Graph Embeddings learned from the structure and literals of knowledge graphs.
-
-ArXiv link for the paper: [Incorporating Literals into Knowledge Graph Embeddings](https://arxiv.org/abs/1802.00934)
+This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks. 
 
 ### Credits
 
-This work is built on top of Tim Dettmers' ConvE codes: <https://github.com/TimDettmers/ConvE>.
+This project is constructed upon the foundation laid by Agustinus Kristiadi's codebase 
+available at <https://github.com/SmartDataAnalytics/LiteralE>, which in turn relies on the ConvE implementation 
+by Tim Dettmers, accessible at <https://github.com/TimDettmers/ConvE>.
+
+
+### ToDos
+
+
 
 ### Getting Started
 
@@ -49,28 +53,10 @@ python main_literal.py dataset {FB15k, FB15k-237, YAGO3-10} model DistMult_text 
 NB: For base models, replace `main_literal.py` with `main.py`.
 
 
-# Variations
+### Visualizing the Results
 
-## FB15k
-* 1-1: 0.24237918215613383
-* 1-n: 0.22899628252788104
-* n-1: 0.28847583643122676
-* n-n: 0.24014869888475837
+To visualize the results, you can use the Jupyter Notebooks in the `evaluation_notebooks` directory.
+* `evaluation_notebooks/evaluate_ablations.ipynb` - Plot results and creates Latex tables for all ablation experiments.
+* `evaluation_notebooks/evaluate_synthetic.ipynb` - Implements the Acc metric, plots the results, creates Latex tables for the experiments around the semi-synthetic dataset.
 
-## FB15k-237
-* 1-1: 0.07172995780590717
-* 1-n: 0.10970464135021098
-* n-1: 0.34177215189873417
-* n-n: 0.4767932489451477
-
-## YAGO3-10
-* 1-1: 0.05405405405405406
-* 1-n: 0.13513513513513514
-* n-1: 0.2702702702702703
-* n-n: 0.5405405405405406
-
-## WN18RR
-* 1-1: 0.18181818181818182
-* 1-n: 0.36363636363636365
-* n-1: 0.2727272727272727
-* n-n: 0.18181818181818182
+In the Notebooks it is specified which result files are needed. We provide the result files of our experiments in the `results` and `saved_models` directory.
