@@ -1,0 +1,37 @@
+
+\begin{table}[]
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.1}
+
+\caption{Numerical feature ablation: original literal feature vs. random features}
+\label{tab:org_vs_rand}
+\begin{center}
+\begin{tabular}{l|rll|rll}
+
+\hline
+      & \multicolumn{3}{c|}{\textbf{original features}} & \multicolumn{3}{c}{\textbf{random features}} \\
+\textbf{model}      & \textbf{MR} & \textbf{MRR} & \textbf{Hits@1} & \textbf{MR}  & \textbf{MRR} & \textbf{Hits@1} \\ \hline
+
+\hline \multicolumn{7}{c}{\textbf{FB15k-237}} \\ \hline 
+LiteralE$_{DistMult}$& $285{\scriptstyle \pm 001}$ & $.310{\scriptstyle \pm .003}$ & $.224{\scriptstyle \pm .003}$ & $286{\scriptstyle \pm 008}$ & $.313{\scriptstyle \pm .001}$ & $.229{\scriptstyle \pm .002}$  \\ 
+LiteralE$_{ComplEx}$& $429{\scriptstyle \pm 002}$ & $.272{\scriptstyle \pm .000}$ & $.193{\scriptstyle \pm .001}$ & $414{\scriptstyle \pm 022}$ & $.278{\scriptstyle \pm .001}$ & $.198{\scriptstyle \pm .001}$  \\ 
+KBLN& $486{\scriptstyle \pm 004}$ & $.295{\scriptstyle \pm .000}$ & $.213{\scriptstyle \pm .001}$ & $618{\scriptstyle \pm 007}$ & $.285{\scriptstyle \pm .002}$ & $.207{\scriptstyle \pm .003}$  \\ 
+MTKGNN& $563{\scriptstyle \pm 006}$ & $.282{\scriptstyle \pm .001}$ & $.202{\scriptstyle \pm .001}$ & $575{\scriptstyle \pm 004}$ & $.282{\scriptstyle \pm .001}$ & $.202{\scriptstyle \pm .001}$  \\ 
+TransEA& $303{\scriptstyle \pm 002}$ & $.203{\scriptstyle \pm .002}$ & $.132{\scriptstyle \pm .002}$ & $305{\scriptstyle \pm 001}$ & $.200{\scriptstyle \pm .003}$ & $.128{\scriptstyle \pm .002}$  \\ 
+\hline \multicolumn{7}{c}{\textbf{YAGO3-10}} \\ \hline 
+LiteralE$_{DistMult}$& $1860{\scriptstyle \pm 018}$ & $.479{\scriptstyle \pm .003}$ & $.400{\scriptstyle \pm .004}$ & $1925{\scriptstyle \pm 058}$ & $.470{\scriptstyle \pm .003}$ & $.388{\scriptstyle \pm .004}$  \\ 
+LiteralE$_{ComplEx}$& $2086{\scriptstyle \pm 034}$ & $.475{\scriptstyle \pm .002}$ & $.400{\scriptstyle \pm .002}$ & $2303{\scriptstyle \pm 116}$ & $.480{\scriptstyle \pm .004}$ & $.408{\scriptstyle \pm .004}$  \\ 
+KBLN& $2850{\scriptstyle \pm 129}$ & $.485{\scriptstyle \pm .023}$ & $.405{\scriptstyle \pm .024}$ & $4243{\scriptstyle \pm 057}$ & $.483{\scriptstyle \pm .001}$ & $.401{\scriptstyle \pm .001}$  \\ 
+MTKGNN& $3322{\scriptstyle \pm 036}$ & $.445{\scriptstyle \pm .015}$ & $.358{\scriptstyle \pm .014}$ & $3329{\scriptstyle \pm 000}$ & $.468{\scriptstyle \pm .000}$ & $.382{\scriptstyle \pm .000}$  \\ 
+TransEA& $2226{\scriptstyle \pm 041}$ & $.084{\scriptstyle \pm .002}$ & $.048{\scriptstyle \pm .001}$ & $2325{\scriptstyle \pm 055}$ & $.084{\scriptstyle \pm .001}$ & $.049{\scriptstyle \pm .001}$  \\ 
+\hline \multicolumn{7}{c}{\textbf{LitWD48k}} \\ \hline 
+LiteralE$_{DistMult}$& $886{\scriptstyle \pm 060}$ & $.326{\scriptstyle \pm .003}$ & $.250{\scriptstyle \pm .003}$ & $875{\scriptstyle \pm 041}$ & $.330{\scriptstyle \pm .004}$ & $.250{\scriptstyle \pm .001}$  \\ 
+LiteralE$_{ComplEx}$& $1489{\scriptstyle \pm 109}$ & $.268{\scriptstyle \pm .005}$ & $.200{\scriptstyle \pm .007}$ & $1358{\scriptstyle \pm 067}$ & $.305{\scriptstyle \pm .005}$ & $.238{\scriptstyle \pm .003}$  \\ 
+KBLN& $1741{\scriptstyle \pm 042}$ & $.329{\scriptstyle \pm .004}$ & $.246{\scriptstyle \pm .004}$ & $1836{\scriptstyle \pm 044}$ & $.334{\scriptstyle \pm .002}$ & $.262{\scriptstyle \pm .002}$  \\ 
+MTKGNN& $3085{\scriptstyle \pm 208}$ & $.289{\scriptstyle \pm .002}$ & $.227{\scriptstyle \pm .003}$ & $2743{\scriptstyle \pm 137}$ & $.297{\scriptstyle \pm .001}$ & $.235{\scriptstyle \pm .001}$  \\ 
+TransEA& $947{\scriptstyle \pm 019}$ & $.197{\scriptstyle \pm .003}$ & $.131{\scriptstyle \pm .003}$ & $952{\scriptstyle \pm 032}$ & $.195{\scriptstyle \pm .005}$ & $.129{\scriptstyle \pm .004}$  \\ 
+
+\hline
+\end{tabular}
+\end{center}
+\end{table}

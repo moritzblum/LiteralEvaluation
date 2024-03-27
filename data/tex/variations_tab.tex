@@ -1,0 +1,26 @@
+
+\begin{table}[]
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.1}
+
+\caption{Comparison of different features derived from the original numerical features for FB15k-237. The model that uses the literals provided with the dataset is named 	extit{original}. For completeness, we also report the scores of the DistMult model without the LiteralE extension to incorporate literals.}
+\label{tab:variations}
+\begin{center}
+
+\begin{tabular}{l|lllll}
+\hline
+\multicolumn{1}{l|}{\textbf{features}} & \textbf{MR} & \textbf{MRR} & \textbf{Hits@1} & \textbf{Hits@3} & \textbf{Hits@10} \\
+\hline \multicolumn{6}{c}{\textbf{KBLN}} \\ \hline 
+original & $486{\scriptstyle \pm 004}$ & $.295{\scriptstyle \pm .000}$ & $.213{\scriptstyle \pm .001}$ & $.324{\scriptstyle \pm .002}$ & $.458{\scriptstyle \pm .002}$ \\ 
+random & $618{\scriptstyle \pm 007}$ & $.285{\scriptstyle \pm .002}$ & $.207{\scriptstyle \pm .003}$ & $.312{\scriptstyle \pm .002}$ & $.442{\scriptstyle \pm .002}$ \\ 
+relation type & $506{\scriptstyle \pm 006}$ & $.293{\scriptstyle \pm .002}$ & $.211{\scriptstyle \pm .002}$ & $.323{\scriptstyle \pm .002}$ & $.456{\scriptstyle \pm .001}$ \\ 
+\hline \multicolumn{6}{c}{\textbf{LiteralE$_{ComplEx}$}} \\ \hline 
+original & $429{\scriptstyle \pm 002}$ & $.272{\scriptstyle \pm .000}$ & $.193{\scriptstyle \pm .001}$ & $.298{\scriptstyle \pm .001}$ & $.431{\scriptstyle \pm .002}$ \\ 
+random & $414{\scriptstyle \pm 022}$ & $.278{\scriptstyle \pm .001}$ & $.198{\scriptstyle \pm .001}$ & $.305{\scriptstyle \pm .002}$ & $.438{\scriptstyle \pm .001}$ \\ 
+relation type & $422{\scriptstyle \pm 014}$ & $.272{\scriptstyle \pm .003}$ & $.192{\scriptstyle \pm .003}$ & $.299{\scriptstyle \pm .005}$ & $.431{\scriptstyle \pm .004}$ \\ 
+base model & $640{\scriptstyle \pm 007}$ & $.289{\scriptstyle \pm .001}$ & $.209{\scriptstyle \pm .001}$ & $.320{\scriptstyle \pm .001}$ & $.448{\scriptstyle \pm .001}$ \\ 
+
+\hline
+\end{tabular}
+\end{center}
+\end{table}

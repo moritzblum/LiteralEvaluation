@@ -1,6 +1,5 @@
 *.swp
 __pycache__
-results/
 src/
 saved_models
 countries
@@ -10,11 +9,16 @@ data/*
 !data/LitWD48K/
 !data/YAGO3-10/
 !data/Synthetic/
+!data/results/
+!data/tex/
 
 data/*/*
 !data/*/literals/
 !data/*/vocab_e1
 !data/Synthetic/*
+
+!data/results/*
+!data/tex/*
 
 create_fb15k-237c.py
 
