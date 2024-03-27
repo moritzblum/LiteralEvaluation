@@ -2,7 +2,7 @@
 
 Evaluation of Link Prediction Models that incorporate numerical literals. 
 
-Figure 1: ![Example KG](./data/tex/example_eiffel_tower.png)
+<img src="./data/tex/example_eiffel_tower.png" width="400">
 
 This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks. 
 
