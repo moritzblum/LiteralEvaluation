@@ -1,12 +1,17 @@
 # LiteralE
 
-Evaluation of Link Prediction Models that incorporate numerical literals. 
+Evaluation of Link Prediction Models that incorporate numerical literals.
+
+This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks. 
+
 
 <p align="center">
 <img src="./data/tex/example_eiffel_tower.png" width="400">
 </p>
 
-This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks. 
+<p align="center">
+Fig. 1: Example Knowledge Graph with numerical literals.
+</p>
 
 ### Credits
 
