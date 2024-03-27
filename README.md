@@ -2,7 +2,9 @@
 
 Evaluation of Link Prediction Models that incorporate numerical literals. 
 
+<p align="center">
 <img src="./data/tex/example_eiffel_tower.png" width="400">
+</p>
 
 This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks. 
 
