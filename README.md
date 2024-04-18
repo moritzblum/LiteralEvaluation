@@ -21,44 +21,60 @@ by Tim Dettmers, accessible at <https://github.com/TimDettmers/ConvE>.
 
 
 ### ToDos
-
+* @Hannes implement command line parameters: `python create_variations.py --dataset {FB15k-237, YAGO3-10, LitWD48K}`
+* @Hannes add description to `dataset_statistics.ipynb` and reference table 1
+* @Moritz describe how to create the synthetic dataset
+* @Moritz create script `python create_ablation.py --dataset {FB15k-237, YAGO3-10, LitWD48K, Synthetic}` from create_relational_ablation_sets.ipynb
+* @Moritz put FB15k-237_class_mapping.csv into an appropriate folder 
+* @Moritz integrate TranEA code
+* @Moritz check where datasets are provided 
 
 
 ### Getting Started
 
-**Note:** Python 3.6+ is required.
+#### Set-up a Conda Environment and Install Dependencies
 
-Note that we only support computation on GPU (CUDA). We have tested our code with Nvidia Titan Xp (12GB) and RTX 2080Ti (11GB). 6 or 8GB of memory should also be enough though we couldn't test them.
-
-1. Install PyTorch. We have verified that version 1.2.0 works.
-2. Install other requirements: `pip install -r requirements.txt`
-3. Run `chmod +x preprocess.sh && ./preprocess.sh`
-4. Install spacy model: `python -m spacy download en && python -m spacy download en_core_web_md`
-5. Preprocess datasets (do these steps for each dataset in `{FB15k, FB15k-237, YAGO3-10}`):
-    1. `python main_literal.py dataset {FB15k, FB15k-237, YAGO3-10} epochs 0 process True`
-    2. Numerical literals: `python preprocess_num_lit.py --dataset {FB15k, FB15k-237, YAGO3-10}`
-    3. Text literals: `python preprocess_txt_lit.py --dataset {FB15k, FB15k-237, YAGO3-10}`
-
-
-### Reproducing Paper's Experiments
-
-For DistMult+LiteralE and ComplEx+LiteralE:
+Set up the environment for all experiments (except TransEA) by running the following commands:
 ```
-python main_literal.py dataset {FB15k, FB15k-237, YAGO3-10} model {DistMult, ComplEx} input_drop 0.2 embedding_dim 100 batch_size 128 epochs 100 lr 0.001 process True
+conda create --name literale python=3.6.13
+pip install -r requirements-literale.txt
 ```
 
-For ConvE+LiteralE:
+For TransEA, set up the environment by running the following commands:
 ```
-python main_literal.py dataset {FB15k, FB15k-237, YAGO3-10} model ConvE input_drop 0.2 hidden_drop 0.3 feat_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True
-```
-
-For DistMult+LiteralE with numerical and textual literals:
-```
-python main_literal.py dataset {FB15k, FB15k-237, YAGO3-10} model DistMult_text input_drop 0.2 embedding_dim 100 batch_size 128 epochs 100 lr 0.001 process True
+conda create --name transea python=3.10
+pip install -r requirements-transea.txt
 ```
 
-NB: For base models, replace `main_literal.py` with `main.py`.
+In the following, we will indicate which environment to use for each experiment by leading (literale) or (transea).
 
+Note: We only support computation on GPU (CUDA). The code can be adjusted easily to run on CPU by removing the `.cuda()` calls.
+
+#### Create Synthetic Dataset
+TODO
+
+#### Preprocess datasets
+1. Preprocess relational data by running: `chmod +x preprocess.sh && ./preprocess.sh`
+2. Preprocess attributive data by consecutively running the following commands:
+    1. Create vocab file: `python main_literal.py dataset {FB15k-237, YAGO3-10, LitWD48K, Synthetic} epochs 0 process True`
+    2. Numerical literals: `python preprocess_num_lit.py --dataset {FB15k-237, YAGO3-10, LitWD48K, Synthetic}`
+    3. Variations of numerical literals: `python create_variations.py --dataset {FB15k-237, YAGO3-10, LitWD48K}`
+3. Create the relational triple ablation dataset by running: `python create_ablation.py --dataset {FB15k-237, YAGO3-10, LitWD48K, Synthetic}`
+   
+### Reproduce all Experiments
+The shell scripts in the `slurm` directory contain the commands to reproduce all experiments. Simply run the following
+commands to reproduce the experiments for the respective datasets/models:
+* `./slurm/slurm_FB15k-237.sh` (use the `literale` environment)
+* `./slurm/slurm_LitWD48K.sh` (use the `literale` environment)
+* `./slurm/slurm_YAGO3-10.sh` (use the `literale` environment)
+* `./slurm/slurm_Synthetic.sh` (use the `literale` environment)
+* `./slurm/slurm_TransEA.sh` (use the `transea` environment)
+
+The results will be saved in the `results` directory. The slurm scripts can be run on a GPU cluster by starting the 
+scripts with `sbatch`. Attention: make sure the specified cluster node resources are available.
+
+### Reproducing Individual Runs
+You can run all commands in the shell scripts manually. Make sure to run the pre-processing steps called by the scripts first.
 
 ### Visualizing the Results
 
