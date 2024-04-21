@@ -1,3 +1,4 @@
+torch==1.10.2
 -e git+https://github.com/TimDettmers/spodernet.git#egg=spodernet
 -e git+https://github.com/TimDettmers/bashmagic.git#egg=bashmagic
 pandas

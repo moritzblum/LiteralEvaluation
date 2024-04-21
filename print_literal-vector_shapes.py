@@ -1,8 +1,8 @@
-
+import numpy as np
 
 if __name__ == "__main__":
     # Load numpy array from file
-    import numpy as np
+
 
     # Load the numerical literal array from file
     literals_num = np.load("data/FB15k-237/numerical_literals_rep.npy", allow_pickle=True)
