@@ -1,15 +1,12 @@
 # Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets
 
-Evaluation of Link Prediction Models that incorporate numerical literals.
-
 This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks 
 associated with the paper "Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets". 
 
+You can find all training result logs used for the paper in `data/results` and the 
+Jupyter Notebooks that created all Visualizations and Tables in `evaluation_notebooks`.
+
 ![alt text](https://anonymous.4open.science/api/repo/LiteralEvaluation-7545/file/data/tex/example_eiffel_tower.png)
-
-
-### ToDos
-* @Moritz integrate TranEA code
 
 
 ### Getting Started
@@ -28,13 +25,15 @@ conda create --name transea python=3.10
 pip install -r requirements-transea.txt
 ```
 
-In the following, we will indicate which environment to use for each experiment by leading (literale) or (transea).
-
-_Note:_ We only support computation on GPU (CUDA). The code can be adjusted easily to run on CPU by removing the `.cuda()` calls.
+_Note:_  
+* In the following, we will indicate which environment to use for each experiment by leading (literale) or (transea).
+* We only support computation on GPU (CUDA). The code can be adjusted easily to run on CPU by removing the `.cuda()` calls.
 
 #### 2. Create datasets 
-_Note:_ These steps are optional, as the datasets are already provided in the `data` directory.
- 
+_Important:_ 
+* These steps are optional, as the datasets are already provided in the `data` directory.
+* Use the `literale` environment.
+
 Create the Semi-Synthetic Dataset: The Synthetic dataset is generated from the FB15k-237 dataset. 
 The dataset is generated to test the performance of the model if both, 
 structure and literal values of entities, are needed to be understood in order 
@@ -45,7 +44,8 @@ Prediction datasets by removing certain relational relations from the original d
 Run `python create_relational_ablations.py {FB15k-237, YAGO3-10, LitWD48K}` to generate the ablation datasets. 
 In the paper we only evaluate the ablation datasets for the FB15k-237 dataset.
 
-#### 3. Preprocess datasets
+#### 3. Preprocess datasets 
+_Important:_ Use the `literale` environment.
 1. Preprocess relational data by running: `chmod +x preprocess.sh && ./preprocess.sh`
 2. Preprocess attributive data by consecutively running the following commands:
     1. Create vocab file: `python main_literal.py dataset {FB15k-237, YAGO3-10, LitWD48K, Synthetic} epochs 0 process True`

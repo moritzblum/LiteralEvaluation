@@ -16,9 +16,9 @@ conda activate literale
 cd /homes/mblum/LiteralEvaluation
 echo "start evaluation on Synthetic"
 
-#python main_literal.py dataset Synthetic epochs 0 process True --feature_type "numerical_literals.npy*train"
-#python preprocess_num_lit.py --dataset Synthetic
-#python preprocess_kg.py --dataset Synthetic
+python main_literal.py dataset Synthetic epochs 0 process True --feature_type "numerical_literals.npy*train"
+python preprocess_num_lit.py --dataset Synthetic
+python preprocess_kg.py --dataset Synthetic
 
 
 # --- Table: Scores achieved on the synthetic dataset ---

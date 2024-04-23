@@ -8,6 +8,11 @@ from tqdm import tqdm
 from torch_geometric.nn.kge.loader import KGTripletLoader
 
 
+"""
+Copied from PyG, but with the following changes:
+- extended rank evaluation to also include head ranks
+"""
+
 class KGEModel(torch.nn.Module):
     r"""An abstract base class for implementing custom KGE models.
 

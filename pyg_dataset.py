@@ -1,41 +1,12 @@
-from typing import Callable, List, Optional
 import tarfile as tar
-
 import torch
 
+from typing import Callable, List, Optional
 from torch_geometric.data import Data, InMemoryDataset, download_url
 
 
 class LiteralLPDataset(InMemoryDataset):
-    r"""The FB15K237 dataset from the `"Translating Embeddings for Modeling
-    Multi-Relational Data"
-    <https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling
-    -multi-relational-data>`_ paper,
-    containing 14,541 entities, 237 relations and 310,116 fact triples.
 
-    .. note::
-
-        The original :class:`FB15k` dataset suffers from major test leakage
-        through inverse relations, where a large number of test triples could
-        be obtained by inverting triples in the training set.
-        In order to create a dataset without this characteristic, the
-        :class:`~torch_geometric.datasets.FB15k_237` describes a subset of
-        :class:`FB15k` where inverse relations are removed.
-
-    Args:
-        root (str): Root directory where the dataset should be saved.
-        split (str, optional): If :obj:`"train"`, loads the training dataset.
-            If :obj:`"val"`, loads the validation dataset.
-            If :obj:`"test"`, loads the test dataset. (default: :obj:`"train"`)
-        transform (callable, optional): A function/transform that takes in an
-            :obj:`torch_geometric.data.Data` object and returns a transformed
-            version. The data object will be transformed before every access.
-            (default: :obj:`None`)
-        pre_transform (callable, optional): A function/transform that takes in
-            an :obj:`torch_geometric.data.Data` object and returns a
-            transformed version. The data object will be transformed before
-            being saved to disk. (default: :obj:`None`)
-    """
     url = {
         "FB15k-237": 'https://github.com/SmartDataAnalytics/LiteralE/raw/master/datasets/FB15k-237.tar.gz',
         "YAGO3-10": 'https://github.com/SmartDataAnalytics/LiteralE/raw/master/datasets/YAGO3-10.tar.gz',

@@ -19,7 +19,7 @@ class LiteralLinkPredDataset(Dataset):
         self.triple_file = triple_file
         self.transform = transform
         self.target_transform = target_transform
-        self.df_literals_num = pd.read_csv(osp.join(self.triple_file, 'literals/numerical_literals.txt'), header=None, sep='\t')
+        self.df_literals_num = pd.read_csv(osp.join(self.triple_file, 'literals/numerical_literals.txt' if DATASET_NAME != 'LitWD48K' else 'literals/numerical_literals_double.txt'), header=None, sep='\t')
 
         # Load external mappings of entities and relations to indices
         vocab_entities = np.load(osp.join(self.triple_file, "vocab_e1"), allow_pickle=True)
@@ -115,10 +115,10 @@ if __name__ == '__main__':
     np.save(f'data/{DATASET_NAME}/literals/numerical_literals_rep.npy', dataset.literals_num.numpy())
 
     # Save attributive relation type literals to numpy file
-    np.save(f'data/{DATASET_NAME}/literals/numerical_literals_rep_attr.npy', dataset.attr_relations_num.numpy())
+    np.save(f'data/{DATASET_NAME}/literals/numerical_literals_attr.npy', dataset.attr_relations_num.numpy())
 
     # Save filtered numerical literals to numpy file
     filtered_ds_100 = dataset
     filtered_ds_100.filter_literals_by_attr_relation_frequency(100)
-    np.save(f'data/{DATASET_NAME}/literals/numerical_literals_rep_filtered_100.npy',
+    np.save(f'data/{DATASET_NAME}/literals/numerical_literals_filtered_100.npy',
             filtered_ds_100.literals_num.numpy())

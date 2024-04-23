@@ -16,9 +16,9 @@ conda activate literale
 cd /homes/mblum/LiteralEvaluation
 echo "start evaluation on YAGO3-10"
 
-#python main_literal.py dataset YAGO3-10 epochs 0 process True --feature_type "numerical_literals.npy*train"
-#python preprocess_num_lit.py --dataset YAGO3-10
-#python preprocess_kg.py --dataset YAGO3-10
+python main_literal.py dataset YAGO3-10 epochs 0 process True --feature_type "numerical_literals.npy*train"
+python preprocess_num_lit.py --dataset YAGO3-10
+python preprocess_kg.py --dataset YAGO3-10
 
 
 # --- Table: Numerical feature ablation: original features vs. random features ---

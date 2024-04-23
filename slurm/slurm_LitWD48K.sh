@@ -16,9 +16,9 @@ conda activate literale
 cd /homes/mblum/LiteralEvaluation
 echo "start evaluation on LitWD48K"
 
-#python main_literal.py dataset LitWD48K epochs 0 process True --feature_type "numerical_literals.npy*train"
-#python preprocess_num_lit.py --dataset LitWD48K
-#python preprocess_kg.py --dataset LitWD48K
+python main_literal.py dataset LitWD48K epochs 0 process True --feature_type "numerical_literals.npy*train"
+python preprocess_num_lit.py --dataset LitWD48K
+python preprocess_kg.py --dataset LitWD48K
 
 
 # --- Table: Numerical feature ablation: original features vs. random features ---

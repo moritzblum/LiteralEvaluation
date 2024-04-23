@@ -1,8 +1,11 @@
 import numpy as np
 
+"""
+Just used to print the shapes of the literal vectors. Not used by other scripts.
+"""
+
 if __name__ == "__main__":
     # Load numpy array from file
-
 
     # Load the numerical literal array from file
     literals_num = np.load("data/FB15k-237/numerical_literals_rep.npy", allow_pickle=True)
