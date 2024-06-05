@@ -17,6 +17,11 @@ data/*/*
 !data/*/vocab_e1
 !data/Synthetic/*
 
+data/FB15k-237/literals/rand_numerical_literals.txt
+data/LitWD48K/literals/rand_numerical_literals.txt
+data/Synthetic/literals/rand_numerical_literals.txt
+data/YAGO3-10/literals/rand_numerical_literals.txt
+
 !data/results/*
 !data/tex/*
 

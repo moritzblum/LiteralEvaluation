@@ -1,5 +1,32 @@
 # Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets
 
+
+### KGA
+
+create the random literal file for kga: kga_literal_preprocessing.ipynb (create rand_numerical_literals.txt, copy it to the KGA data directory, and rename to numerical_ltierals.txt)
+32 bins work best for the tucker model according to the KGA paper:
+python augment/augment_lp.py --dataset FB15k-237 --bins 32
+python augment/augment_lp.py --dataset FB15k-237_rand --bins 32
+
+# QSC works best for tucker according to the KGA paper
+python run.py --dataset FB15k-237_rand_QSC_32 --model tucker --output out_01
+python run.py --dataset FB15k-237_QSC_32 --model tucker --output out_01
+
+python run.py --dataset YAGO3-10_rand_QSC_32 --model tucker --output out_01
+python run.py --dataset YAGO3-10_QSC_32 --model tucker --output out_01
+
+python run.py --dataset LitWD48K_rand_QSC_32 --model tucker --output out_01
+python run.py --dataset LitWD48K_QSC_32 --model tucker --output out_01
+
+python run.py --dataset Synthetic_rand_QSC_32 --model tucker --output out_01
+python run.py --dataset Synthetic_QSC_32 --model tucker --output out_01
+
+
+
+
+
+
+
 This repository contains the source code, datasets, training result logs, and visualization Jupyter Notebooks 
 associated with the paper "Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets". 
 
@@ -13,7 +40,7 @@ Jupyter Notebooks that created all Visualizations and Tables in `evaluation_note
 Please follow the instructions below to set up the environment and datasets to reproduce the experiments.
 
 #### 1. Set-up a Conda Environment and Install Dependencies
-Set up the environment for all experiments (except TransEA) by running the following commands:
+Set up the environment for all experiments (except TransEA & KGA) by running the following commands:
 ```
 conda create --name literale python=3.6.13
 pip install -r requirements-literale.txt
@@ -23,6 +50,14 @@ For TransEA, set up the environment by running the following commands:
 ```
 conda create --name transea python=3.10
 pip install -r requirements-transea.txt
+```
+
+For KGA, set up the environment by running the following commands:
+```
+conda create --name tucker python=3.8
+pip install torch
+pip install numpy
+pip install pandas 
 ```
 
 _Note:_  
@@ -43,6 +78,8 @@ Create the relational ablation Datasets: The ablation datasets are created from 
 Prediction datasets by removing certain relational relations from the original dataset. 
 Run `python create_relational_ablations.py {FB15k-237, YAGO3-10, LitWD48K}` to generate the ablation datasets. 
 In the paper we only evaluate the ablation datasets for the FB15k-237 dataset.
+
+KGE Dataset: `python augment/augment_lp.py --dataset FB15k-237 --bins 32`
 
 #### 3. Preprocess datasets 
 _Important:_ Use the `literale` environment.
