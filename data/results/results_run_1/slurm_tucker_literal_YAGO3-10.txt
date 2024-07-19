@@ -1,0 +1,7 @@
+2024-06-17 17:20:54 INFO     Cuda: True
+2024-06-17 17:20:54 INFO     Training the tucker_literal model...
+2024-06-17 17:20:56 INFO     Number of training data points: 2158080
+2024-06-17 17:21:06 INFO     Starting training...
+2024-06-17 17:24:25 INFO     Step at 1
+2024-06-17 17:24:25 INFO     Training Time elapsed: 199.17548727989197
+2024-06-17 17:24:25 INFO     Training Loss: 0.02025619921122581

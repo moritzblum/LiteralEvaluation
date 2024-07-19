@@ -1,0 +1,10 @@
+2024-06-18 01:28:37 INFO     Cuda: True
+2024-06-18 01:28:37 INFO     Training the complex_literal model...
+2024-06-18 01:28:37 INFO     Number of training data points: 544230
+2024-06-18 01:28:44 INFO     Starting training...
+2024-06-18 01:29:07 INFO     Step at 1
+2024-06-18 01:29:07 INFO     Training Time elapsed: 22.397436141967773
+2024-06-18 01:29:07 INFO     Training Loss: 0.01446976755759639
+2024-06-18 01:29:26 INFO     Step at 2
+2024-06-18 01:29:26 INFO     Training Time elapsed: 19.445597648620605
+2024-06-18 01:29:26 INFO     Training Loss: 0.002454240305814892

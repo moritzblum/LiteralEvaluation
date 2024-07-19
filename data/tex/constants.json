@@ -1,0 +1,22 @@
+{
+    "model_2_name":
+        {
+            "literaledistmult": "LiteralE$_{DistMult}$",
+            "literalecomplex": "LiteralE$_{ComplEx}$",
+            "kbln": "KBLN",
+            "multitask": "MTKGNN",
+            "transea": "TransEA",
+            "kgatucker": "KGA$_{TuckER}$",
+            "kgadistmult": "KGA$_{DistMult}$"
+        },
+    "rank-file_2_name":
+        {
+            "ranks_test_evaluation_DistMult_0.2_0.0_literal": "LiteralE$_{DistMult}$",
+            "ranks_test_evaluation_ComplEx_0.2_0.0_literal": "LiteralE$_{ComplEx}$",
+            "ranks_test_evaluation_KBLN_0.2_0.0_literal": "KBLN",
+            "ranks_test_evaluation_MTKGNN_0.2_0.0_literal": "MTKGNN",
+            "ranks_test_evaluation_TransEA_0.3": "TransEA",
+            "ranks_test_evaluation_kgatucker": "KGA$_{TuckER}$",
+            "ranks_test_evaluation_kgadistmult": "KGA$_{DistMult}$"
+        }
+}

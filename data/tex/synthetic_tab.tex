@@ -4,17 +4,20 @@
 \setlength{\tabcolsep}{6pt}
 \renewcommand{\arraystretch}{1.1}
 
-\caption{Scores achieved on the synthetic dataset.}
+\caption{Scores achieved on the synthetic dataset. Acc$_{org}$ denotes the Acc achieved on the synthetic dataset when we provide the meaningful synthetic literal values, whereas Acc$_{rand}$ denotes the Acc on the synthetic dataset if we apply the random feature ablation after the dataset creation.}
+\label{tab:synthetic}
 \begin{center}
 
 \begin{tabular}{l|l|l}
 \hline
 Model & Acc$_{org}$                            &  Acc$_{rand}$                            \\ \hline
-LiteralE$_{DistMult}$ & $ .523{\scriptstyle \pm.015}$ & $ .481{\scriptstyle \pm.007}$\\ 
-LiteralE$_{ComplEx}$ & $ .519{\scriptstyle \pm.006}$ & $ .501{\scriptstyle \pm.007}$\\ 
-KBLN & $ .479{\scriptstyle \pm.001}$ & $ .502{\scriptstyle \pm.013}$\\ 
-MTKGNN & $ .549{\scriptstyle \pm.003}$ & $ .524{\scriptstyle \pm.019}$\\ 
-TransEA & $ .514{\scriptstyle \pm.013}$ & $ .493{\scriptstyle \pm.010}$\\ 
+LiteralE$_{DistMult}$ & $0.512 {\scriptstyle \pm 0.003}$ & $0.482 {\scriptstyle \pm 0.001}$\\ 
+LiteralE$_{ComplEx}$ & $0.493 {\scriptstyle \pm 0.005}$ & $0.498 {\scriptstyle \pm 0.020}$\\ 
+KBLN & $0.482 {\scriptstyle \pm 0.009}$ & $0.493 {\scriptstyle \pm 0.005}$\\ 
+MTKGNN & $0.472 {\scriptstyle \pm 0.006}$ & $0.495 {\scriptstyle \pm 0.009}$\\ 
+TransEA & $0.489 {\scriptstyle \pm 0.022}$ & $0.496 {\scriptstyle \pm 0.020}$\\ 
+KGA$_{TuckER}$ & $0.999 {\scriptstyle \pm 0.000}$ & $0.510 {\scriptstyle \pm 0.007}$\\ 
+KGA$_{DistMult}$ & $0.999 {\scriptstyle \pm 0.000}$ & $0.487 {\scriptstyle \pm 0.011}$\\ 
 
 \hline
 \end{tabular}
