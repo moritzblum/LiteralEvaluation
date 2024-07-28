@@ -1,7 +1,7 @@
 # Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets
 
 This repository contains the following resources for the paper [Numerical Literals in Link Prediction: 
-A Critical Examination of Models and Datasets](todo Archiv Link):
+A Critical Examination of Models and Datasets](https://arxiv.org/abs/2407.18241):
 * Source code to create the proposed datasets: Ablated datasets and Semi-Synthetic datasets. (`/preprocessing_literalevaluation`)
 * Commands and settings to evaluate the investigated models on the datasets. (See below & `/slurm`)
 * Training logs we obtained during the experiments. (`/data/results` & `/data/saved_models`)
@@ -151,16 +151,16 @@ For the evaluation of the models, we used the following repositories:
 
 ## Cite
 
-Please cite [our paper](todo archiv link) if you use our evaluation dataset in your own work:
+Please cite [our paper](https://arxiv.org/abs/2407.18241) if you use our evaluation dataset in your own work:
 
 ```
 @inproceedings{mblum-etal-2024-literalevaluation,
     title = "Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets",
-    author = "Blum, Moritz  and
-      Ell, Basil  and
-      Ill, Hannes and 
-      Cimiano, Philipp",
-    booktitle = "Proceedings of the 23rd International Semantic Web Conference (ISWC 2024)",
+    author = " Blum, Moritz  and
+               Ell, Basil  and
+               Ill, Hannes and 
+               Cimiano, Philipp",
+    booktitle = "Proceedings of the 23rd International Semantic Web Conference",
     month = November,
     year = "2024"
 }
