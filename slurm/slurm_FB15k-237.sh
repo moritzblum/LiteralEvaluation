@@ -38,11 +38,11 @@ echo "start evaluation on FB15k-237"
 #python -u main.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True > ~/LiteralEvaluation/results/slurm_complex_fb15k-237.txt
 
 # --- Table: Comparison of different features derived from the origial numerical features ---
-#python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_attr.npy*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_fb15k-237_attr.txt
+#python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_attr.npy*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_FB15k-237_attribute.txt
 #python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_filtered_100.npy*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_fb15k-237_filtered-100.txt
 #python -u main_literal.py dataset FB15k-237 model ComplEx input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "zeros*train" > ~/LiteralEvaluation/results/slurm_literalecomplex_fb15k-237_zeros.txt
 
-#python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_attr.npy*train" > ~/LiteralEvaluation/results/slurm_kbln_fb15k-237_attr.txt
+#python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_attr.npy*train" > ~/LiteralEvaluation/results/slurm_kbln_FB15k-237_attribute.txt
 #python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "numerical_literals_filtered_100.npy*train" > ~/LiteralEvaluation/results/slurm_kbln_fb15k-237_filtered-100.txt
 #python -u main_kbln.py dataset FB15k-237 model KBLN input_drop 0.2 embedding_dim 200 batch_size 128 epochs 100 lr 0.001 process True --feature_type "zeros*train" > ~/LiteralEvaluation/results/slurm_kbln_fb15k-237_zeros.txt
 

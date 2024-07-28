@@ -1,0 +1,53 @@
+
+\begin{table*}[]
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.1}
+
+\caption{Comparison of model scores trained and evaluated on datasets, each subjected to all proposed literal ablations. The model that uses the literals provided with the dataset is named \textit{original}. The models that use only the relation type and not the concrete literal value are are named \textit{relation type}. }
+\label{tab:variations}
+\begin{center}
+
+\begin{tabular}{l|l|lllll}
+\hline
+& \multicolumn{1}{l|}{\textbf{features}} & \textbf{MR} & \textbf{MRR} & \textbf{Hits@1} & \textbf{Hits@3} & \textbf{Hits@10} \\
+\hline \multirow{8}{*}{\rotatebox[origin=c]{90}{FB15k-237}} 
+& \multicolumn{6}{c}{\textbf{KGA$_{TuckER}$}} \\ 
+ \cline{2-7} 
+& original & $200{\scriptstyle \pm 004}$ & $.324{\scriptstyle \pm .001}$ & $.234{\scriptstyle \pm .000}$ & $.355{\scriptstyle \pm .002}$ & $.508{\scriptstyle \pm .001}$ \\ 
+& random & $200{\scriptstyle \pm 001}$ & $.322{\scriptstyle \pm .001}$ & $.231{\scriptstyle \pm .001}$ & $.354{\scriptstyle \pm .000}$ & $.505{\scriptstyle \pm .001}$ \\ 
+& relation type & $217{\scriptstyle \pm 002}$ & $.319{\scriptstyle \pm .001}$ & $.229{\scriptstyle \pm .001}$ & $.351{\scriptstyle \pm .001}$ & $.502{\scriptstyle \pm .001}$ \\ 
+\cline{2-7} 
+& \multicolumn{6}{c}{\textbf{KGA$_{DistMult}$}} \\ 
+ \cline{2-7} 
+& original & $372{\scriptstyle \pm 007}$ & $.307{\scriptstyle \pm .001}$ & $.221{\scriptstyle \pm .002}$ & $.336{\scriptstyle \pm .001}$ & $.478{\scriptstyle \pm .001}$ \\ 
+& random & $389{\scriptstyle \pm 004}$ & $.304{\scriptstyle \pm .001}$ & $.220{\scriptstyle \pm .002}$ & $.333{\scriptstyle \pm .001}$ & $.472{\scriptstyle \pm .001}$ \\ 
+& relation type & $401{\scriptstyle \pm 011}$ & $.303{\scriptstyle \pm .002}$ & $.218{\scriptstyle \pm .002}$ & $.333{\scriptstyle \pm .001}$ & $.474{\scriptstyle \pm .005}$ \\ 
+\hline \multirow{8}{*}{\rotatebox[origin=c]{90}{YAGO3-10}} 
+& \multicolumn{6}{c}{\textbf{KGA$_{TuckER}$}} \\ 
+ \cline{2-7} 
+& original & $1046{\scriptstyle \pm 003}$ & $.497{\scriptstyle \pm .004}$ & $.412{\scriptstyle \pm .005}$ & $.546{\scriptstyle \pm .005}$ & $.651{\scriptstyle \pm .001}$ \\ 
+& random & $1094{\scriptstyle \pm 020}$ & $.492{\scriptstyle \pm .002}$ & $.407{\scriptstyle \pm .002}$ & $.539{\scriptstyle \pm .002}$ & $.646{\scriptstyle \pm .002}$ \\ 
+& relation type & $1320{\scriptstyle \pm 064}$ & $.521{\scriptstyle \pm .005}$ & $.439{\scriptstyle \pm .005}$ & $.570{\scriptstyle \pm .003}$ & $.671{\scriptstyle \pm .005}$ \\ 
+\cline{2-7} 
+& \multicolumn{6}{c}{\textbf{KGA$_{DistMult}$}} \\ 
+ \cline{2-7} 
+& original & $1554{\scriptstyle \pm 005}$ & $.495{\scriptstyle \pm .003}$ & $.407{\scriptstyle \pm .004}$ & $.543{\scriptstyle \pm .002}$ & $.661{\scriptstyle \pm .001}$ \\ 
+& random & $1696{\scriptstyle \pm 071}$ & $.496{\scriptstyle \pm .002}$ & $.410{\scriptstyle \pm .004}$ & $.543{\scriptstyle \pm .002}$ & $.655{\scriptstyle \pm .002}$ \\ 
+& relation type & $1755{\scriptstyle \pm 061}$ & $.509{\scriptstyle \pm .002}$ & $.423{\scriptstyle \pm .002}$ & $.559{\scriptstyle \pm .004}$ & $.668{\scriptstyle \pm .002}$ \\ 
+\hline \multirow{8}{*}{\rotatebox[origin=c]{90}{LitWD48k}} 
+& \multicolumn{6}{c}{\textbf{KGA$_{TuckER}$}} \\ 
+ \cline{2-7} 
+& original & $353{\scriptstyle \pm 010}$ & $.403{\scriptstyle \pm .001}$ & $.315{\scriptstyle \pm .001}$ & $.435{\scriptstyle \pm .002}$ & $.584{\scriptstyle \pm .000}$ \\ 
+& random & $395{\scriptstyle \pm 007}$ & $.376{\scriptstyle \pm .001}$ & $.293{\scriptstyle \pm .001}$ & $.403{\scriptstyle \pm .002}$ & $.545{\scriptstyle \pm .002}$ \\ 
+& relation type & $672{\scriptstyle \pm 013}$ & $.386{\scriptstyle \pm .001}$ & $.303{\scriptstyle \pm .001}$ & $.418{\scriptstyle \pm .000}$ & $.556{\scriptstyle \pm .001}$ \\ 
+\cline{2-7} 
+& \multicolumn{6}{c}{\textbf{KGA$_{DistMult}$}} \\ 
+ \cline{2-7} 
+& original & $504{\scriptstyle \pm 005}$ & $.335{\scriptstyle \pm .001}$ & $.250{\scriptstyle \pm .001}$ & $.360{\scriptstyle \pm .002}$ & $.513{\scriptstyle \pm .003}$ \\ 
+& random & $1422{\scriptstyle \pm 094}$ & $.227{\scriptstyle \pm .004}$ & $.169{\scriptstyle \pm .003}$ & $.243{\scriptstyle \pm .005}$ & $.339{\scriptstyle \pm .006}$ \\ 
+& relation type & $786{\scriptstyle \pm 015}$ & $.359{\scriptstyle \pm .001}$ & $.268{\scriptstyle \pm .001}$ & $.388{\scriptstyle \pm .002}$ & $.557{\scriptstyle \pm .003}$ \\ 
+
+\hline
+\end{tabular}
+\end{center}
+\end{table*}

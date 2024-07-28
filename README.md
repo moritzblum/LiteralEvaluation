@@ -1,11 +1,5 @@
 # Numerical Literals in Link Prediction: A Critical Examination of Models and Datasets
 
-# TODOs
-* KGA mit Attriutive Ablation Methode Training überwachen und zum Paper hinzufügen 
-* ACL Paper Format nach ISWC Paper Format überführen
-* Paper auf Arxiv hochladen  
-* Twitter Post zum angenommenen Paper
-
 This repository contains the following resources for the paper [Numerical Literals in Link Prediction: 
 A Critical Examination of Models and Datasets](todo Archiv Link):
 * Source code to create the proposed datasets: Ablated datasets and Semi-Synthetic datasets. (`/preprocessing_literalevaluation`)
