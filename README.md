@@ -7,7 +7,7 @@ A Critical Examination of Models and Datasets](https://arxiv.org/abs/2407.18241)
 * Training logs we obtained during the experiments. (`/data/results` & `/data/saved_models`)
 * Jupyter Notebooks we used to create the visualizations and tables in the paper based on the training logs. (`/evaluation_notebooks`)
 
-![alt text](https://anonymous.4open.science/api/repo/LiteralEvaluation-7545/file/data/tex/example_eiffel_tower.png)
+![alt text](data/tex/example_eiffel_tower.png)
 
 
 ## Create the Datasets
